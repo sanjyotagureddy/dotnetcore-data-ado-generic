@@ -55,11 +55,11 @@ namespace DataLayer_Factory
                 }
             }
 
-            var dataset = new DataSet();
-            var dataAdaper = _database.CreateAdapter(command);
-            dataAdaper.Fill(dataset);
+            var dataSet = new DataSet();
+            var dataAdapter = _database.CreateAdapter(command);
+            dataAdapter.Fill(dataSet);
 
-            return dataset.Tables[0];
+            return dataSet.Tables[0];
         }
 
         public DataSet GetDataSet(string commandText, CommandType commandType, IDbDataParameter[] parameters = null)
@@ -151,7 +151,7 @@ namespace DataLayer_Factory
                 }
             }
 
-            object newId = command.ExecuteScalar();
+            var newId = command.ExecuteScalar();
             lastId = Convert.ToInt32(newId);
 
             return lastId;
@@ -172,7 +172,7 @@ namespace DataLayer_Factory
                 }
             }
 
-            object newId = command.ExecuteScalar();
+            var newId = command.ExecuteScalar();
             lastId = Convert.ToInt64(newId);
 
             return lastId;
