@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace DataLayer_Factory.Factories.Interfaces
+namespace DotNet.Factory.Generic.DataLayer.Factories.Interfaces
 {
     public interface IDatabaseHandler
     {

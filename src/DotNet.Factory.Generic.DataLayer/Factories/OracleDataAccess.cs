@@ -1,8 +1,8 @@
-﻿using DataLayer_Factory.Factories.Interfaces;
-using System.Data;
+﻿using System.Data;
 using System.Data.OracleClient;
+using DotNet.Factory.Generic.DataLayer.Factories.Interfaces;
 
-namespace DataLayer_Factory.Factories
+namespace DotNet.Factory.Generic.DataLayer.Factories
 {
     public class OracleDataAccess : IDatabaseHandler
     {

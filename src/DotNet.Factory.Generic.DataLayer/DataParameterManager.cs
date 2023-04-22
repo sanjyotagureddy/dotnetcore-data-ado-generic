@@ -1,8 +1,8 @@
 ﻿using System.Data;
-using System.Data.SqlClient;
 using System.Data.OracleClient;
+using System.Data.SqlClient;
 
-namespace DataLayer_Factory
+namespace DotNet.Factory.Generic.DataLayer
 {
     public class DataParameterManager
     {

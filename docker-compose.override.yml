@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  dotnet.factory.generic.datalayer.webapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:SampleDb=server=orderdb;Database=SampleDb;User Id=sa;Password=SwN12345678;TrustServerCertificate=True;"
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    ports:
+      - "80"
+      - "443"
+    depends_on:
+      - sampledb
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  sampledb: 
+    container_name: sampledb
+    environment:
+      SA_PASSWORD: "SwN12345678"
+      ACCEPT_EULA: "Y"
+    restart: always
+    ports:
+      - "1433:1433"

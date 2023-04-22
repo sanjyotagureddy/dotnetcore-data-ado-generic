@@ -1,48 +1,43 @@
-﻿using DataLayer_Factory.Factories.Interfaces;
-using System.Data;
-using System.Data.OleDb;
+﻿using System.Data;
+using System.Data.SqlClient;
+using DotNet.Factory.Generic.DataLayer.Factories.Interfaces;
 
-namespace DataLayer_Factory.Factories
+namespace DotNet.Factory.Generic.DataLayer.Factories
 {
-    public class OleDbDataAccess: IDatabaseHandler
+    public class SqlDataAccess : IDatabaseHandler
     {
         private string ConnectionString { get; set; } 
-        public OleDbDataAccess(string connectionString)
+        public SqlDataAccess(string connectionString)
         {
             ConnectionString = connectionString;
         }
-
-
         public IDbConnection CreateConnection()
         {
-            return new OleDbConnection();
+            return new SqlConnection(ConnectionString);
         }
-
         public void CloseConnection(IDbConnection connection)
         {
-            var oleDbConnection = (OleDbConnection)connection;
-            oleDbConnection.Close();
-            oleDbConnection.Dispose();
+            var sqlConnection = (SqlConnection)connection;
+            sqlConnection.Close();
+            sqlConnection.Dispose();
         }
-
         public IDbCommand CreateCommand(string commandText, CommandType commandType, IDbConnection connection)
         {
-            return new OleDbCommand()
+            return new SqlCommand
             {
                 CommandText = commandText,
-                Connection = (OleDbConnection)connection,
+                Connection = (SqlConnection)connection,
                 CommandType = commandType
             };
         }
-
         public IDataAdapter CreateAdapter(IDbCommand command)
         {
-            return new OleDbDataAdapter((OleDbCommand) command);
+            return new SqlDataAdapter((SqlCommand)command);
         }
 
         public IDbDataParameter CreateParameter(IDbCommand command)
         {
-            var sqlCommand = (OleDbCommand)command;
+            var sqlCommand = (SqlCommand)command;
             return sqlCommand.CreateParameter();
         }
     }
